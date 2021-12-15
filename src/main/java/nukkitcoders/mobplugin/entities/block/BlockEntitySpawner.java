@@ -238,4 +238,13 @@ public class BlockEntitySpawner extends BlockEntitySpawnable {
     public void setMaxNearbyEntities(int count) {
         this.maxNearbyEntities = count;
     }
+
+    public void setSpawnRange(short range) {
+        this.spawnRange = (int) range;
+        this.namedTag.putShort(TAG_SPAWN_RANGE, range);
+    }
+
+    public int getSpawnRange() {
+        return this.spawnRange;
+    }
 }
