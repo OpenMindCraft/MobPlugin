@@ -197,7 +197,7 @@ public class HorseBase extends WalkingAnimal implements EntityRideable {
 
     public void setSaddled(boolean saddled) {
         if (this.canBeSaddled()) {
-            this.saddled = true;
+            this.saddled = saddled;
             this.setDataFlag(DATA_FLAGS, DATA_FLAG_SADDLED, saddled);
         }
     }
