@@ -129,6 +129,8 @@ public class HorseBase extends WalkingAnimal implements EntityRideable {
         this.route = null;
         this.target = null;
 
+        if (forward < 0) forward = forward / 2;
+
         strafe *= 0.4;
 
         double f = strafe * strafe + forward * forward;

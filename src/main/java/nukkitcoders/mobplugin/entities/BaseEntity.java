@@ -588,4 +588,9 @@ public abstract class BaseEntity extends EntityCreature implements EntityAgeable
     public boolean canTarget(Entity entity) {
         return entity instanceof Player;
     }
+
+    @Override
+    protected boolean applyNameTag(Player player, Item item) {
+        return !(this instanceof EnderDragon) && super.applyNameTag(player, item);
+    }
 }
