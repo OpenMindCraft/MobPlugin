@@ -21,7 +21,7 @@ public abstract class Fish extends SwimmingAnimal {
 
     @Override
     public boolean onInteract(Player player, Item item, Vector3 clickedPos) {
-        if (item.getId() == Item.BUCKET && (item.getDamage() == 0 || item.getDamage() == 8) && this.isInsideOfWater()) {
+        if (item.getId() == Item.BUCKET && (item.getDamage() == 0 || item.getDamage() == 8) && Utils.entityInsideWaterFast(this)) {
             this.close();
             if (item.getCount() <= 1) {
                 player.getInventory().setItemInHand(Item.get(Item.BUCKET, this.getBucketMeta(), 1));

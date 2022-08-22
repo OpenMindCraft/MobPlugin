@@ -16,7 +16,7 @@ public class Parrot extends FlyingAnimal {
 
     public static final int NETWORK_ID = 30;
 
-    public int variant;
+    protected int variant;
 
     private static final int[] VARIANTS = {0, 1, 2, 3, 4};
 

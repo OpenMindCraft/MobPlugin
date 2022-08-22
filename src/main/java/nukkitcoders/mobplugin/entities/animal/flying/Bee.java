@@ -59,11 +59,6 @@ public class Bee extends FlyingMonster {
     }
 
     @Override
-    public boolean doesTriggerPressurePlate() {
-        return false;
-    }
-
-    @Override
     public double getSpeed() {
         return 1.2;
     }

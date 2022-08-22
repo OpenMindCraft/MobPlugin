@@ -194,7 +194,7 @@ public class BlockEntitySpawner extends BlockEntitySpawnable {
 
     @Override
     public boolean isBlockEntityValid() {
-        return this.getBlock().getId() == BlockID.MONSTER_SPAWNER;
+        return level.getBlockIdAt((int) x, (int) y, (int) z) == Block.MONSTER_SPAWNER;
     }
 
     public int getSpawnEntityType() {

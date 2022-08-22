@@ -16,7 +16,7 @@ public class Llama extends HorseBase {
 
     public static final int NETWORK_ID = 29;
 
-    public int variant;
+    protected int variant;
 
     private static final int[] VARIANTS = {0, 1, 2, 3};
 

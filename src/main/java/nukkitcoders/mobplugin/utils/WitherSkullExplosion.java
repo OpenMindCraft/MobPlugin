@@ -39,7 +39,7 @@ public class WitherSkullExplosion extends Explosion {
     private final Object what;
     private boolean doesDamage = true;
     private List<Block> affectedBlocks = new ArrayList<>();
-    
+
     public WitherSkullExplosion(Position center, double size, Entity what) {
         super(center, size, what);
         this.level = center.getLevel();
@@ -49,7 +49,7 @@ public class WitherSkullExplosion extends Explosion {
     }
 
     public boolean explodeA() {
-        if (what instanceof EntityExplosive && ((Entity) what).isInsideOfWater()) {
+        if (what instanceof EntityExplosive && Utils.entityInsideWaterFast((Entity) what)) {
             this.doesDamage = false;
             return true;
         }

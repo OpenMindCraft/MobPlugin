@@ -16,8 +16,8 @@ import nukkitcoders.mobplugin.entities.animal.walking.SkeletonHorse;
 import nukkitcoders.mobplugin.entities.monster.walking.Drowned;
 import nukkitcoders.mobplugin.route.RouteFinder;
 import nukkitcoders.mobplugin.runnable.RouteFinderSearchTask;
+import nukkitcoders.mobplugin.utils.FastMathLite;
 import nukkitcoders.mobplugin.utils.Utils;
-import org.apache.commons.math3.util.FastMath;
 
 public abstract class WalkingEntity extends BaseEntity {
 
@@ -184,7 +184,7 @@ public abstract class WalkingEntity extends BaseEntity {
                         this.motionZ = this.getSpeed() * moveMultiplier * 0.1 * (z / diff);
                     }
                 }
-                if ((this.passengers.isEmpty() || this instanceof Llama || this instanceof Pig) && (this.stayTime <= 0 || Utils.rand())) this.yaw = Math.toDegrees(-FastMath.atan2(x / diff, z / diff));
+                if ((this.passengers.isEmpty() || this instanceof Llama || this instanceof Pig) && (this.stayTime <= 0 || Utils.rand())) this.yaw = Math.toDegrees(-FastMathLite.atan2(x / diff, z / diff));
             }
 
             Vector3 before = this.target;
@@ -213,7 +213,7 @@ public abstract class WalkingEntity extends BaseEntity {
                         this.motionZ = this.getSpeed() * moveMultiplier * 0.15 * (z / diff);
                     }
                 }
-                if ((this.passengers.isEmpty() || this instanceof Llama || this instanceof Pig) && (this.stayTime <= 0 || Utils.rand())) this.yaw = Math.toDegrees(-FastMath.atan2(x / diff, z / diff));
+                if ((this.passengers.isEmpty() || this instanceof Llama || this instanceof Pig) && (this.stayTime <= 0 || Utils.rand())) this.yaw = Math.toDegrees(-FastMathLite.atan2(x / diff, z / diff));
             }
 
             double dx = this.motionX;

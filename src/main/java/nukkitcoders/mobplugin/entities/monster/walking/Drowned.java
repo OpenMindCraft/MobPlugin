@@ -18,8 +18,8 @@ import cn.nukkit.network.protocol.MobEquipmentPacket;
 import nukkitcoders.mobplugin.MobPlugin;
 import nukkitcoders.mobplugin.entities.monster.WalkingMonster;
 import nukkitcoders.mobplugin.entities.projectile.EntityTrident;
+import nukkitcoders.mobplugin.utils.FastMathLite;
 import nukkitcoders.mobplugin.utils.Utils;
-import org.apache.commons.math3.util.FastMath;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class Drowned extends WalkingMonster implements EntitySmite {
 
     public static final int NETWORK_ID = 110;
 
-    public Item tool;
+    protected Item tool;
 
     public Drowned(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
@@ -92,11 +92,11 @@ public class Drowned extends WalkingMonster implements EntitySmite {
             double f = 1.3;
             double yaw = this.yaw;
             double pitch = this.pitch;
-            double yawR = FastMath.toRadians(yaw);
-            double pitchR = FastMath.toRadians(pitch);
+            double yawR = FastMathLite.toRadians(yaw);
+            double pitchR = FastMathLite.toRadians(pitch);
             Location pos = new Location(this.x - Math.sin(yawR) * Math.cos(pitchR) * 0.5, this.y + this.getHeight() - 0.18,
                     this.z + Math.cos(yawR) * Math.cos(pitchR) * 0.5, yaw, pitch, this.level);
-            if (this.getLevel().getBlockIdAt((int) pos.getX(), (int) pos.getY(), (int) pos.getZ()) == Block.AIR) {
+            if (this.getLevel().getBlockIdAt(pos.getFloorX(), pos.getFloorY(), pos.getFloorZ()) == Block.AIR) {
                 Entity k = Entity.createEntity("Trident", pos, this);
                 if (!(k instanceof EntityTrident)) {
                     return;
@@ -139,8 +139,10 @@ public class Drowned extends WalkingMonster implements EntitySmite {
                 drops.add(Item.get(Item.GOLD_INGOT, 0, 1));
             }
 
-            if (tool != null && Utils.rand(1, 100) == 50) {
+            if (tool != null && Utils.rand(1, 4) == 1) {
                 drops.add(tool);
+            } else if (tool == null && Utils.rand(1, 80) <= 3) {
+                drops.add(Item.get(Item.TRIDENT, Utils.rand(230, 246), 1));
             }
         }
 
@@ -160,7 +162,7 @@ public class Drowned extends WalkingMonster implements EntitySmite {
                 }
                 return;
             case 2:
-                if (Utils.rand(1, 100) == 50) {
+                if (Utils.rand(1, 100) == 1) {
                     this.tool = Item.get(Item.FISHING_ROD, Utils.rand(51, 61), 1);
                 }
                 return;
@@ -191,5 +193,9 @@ public class Drowned extends WalkingMonster implements EntitySmite {
         if (tool != null) {
             this.namedTag.put("Item", NBTIO.putItemHelper(tool));
         }
+    }
+
+    public Item getTool() {
+        return this.tool;
     }
 }

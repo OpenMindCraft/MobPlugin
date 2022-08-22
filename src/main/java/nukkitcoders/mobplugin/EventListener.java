@@ -47,9 +47,9 @@ import nukkitcoders.mobplugin.event.entity.SpawnGolemEvent;
 import nukkitcoders.mobplugin.event.entity.SpawnWitherEvent;
 import nukkitcoders.mobplugin.event.spawner.SpawnerChangeTypeEvent;
 import nukkitcoders.mobplugin.event.spawner.SpawnerCreateEvent;
+import nukkitcoders.mobplugin.utils.FastMathLite;
 import nukkitcoders.mobplugin.utils.Utils;
 
-import org.apache.commons.math3.util.FastMath;
 
 import static nukkitcoders.mobplugin.entities.block.BlockEntitySpawner.*;
 
@@ -304,7 +304,7 @@ public class EventListener implements Listener {
             EntityEventPacket pk = new EntityEventPacket();
             pk.eid = entity.getId();
             pk.event = 27;
-            entity.level.addChunkPacket(entity.getChunkX() >> 4, entity.getChunkZ() >> 4, pk);
+            entity.level.addChunkPacket(entity.getChunkX(), entity.getChunkZ(), pk);
         }
     }
 
@@ -359,7 +359,7 @@ public class EventListener implements Listener {
             );
 
             for (int i = 0; i < 8; i++) {
-                aab.offset(-FastMath.sin(player.getYaw() * Math.PI / 180) * i, i * (Math.tan(player.getPitch() * -3.141592653589793 / 180)), FastMath.cos(player.getYaw() * Math.PI / 180) * i);
+                aab.offset(-FastMathLite.sin(player.getYaw() * Math.PI / 180) * i, i * (Math.tan(player.getPitch() * -3.141592653589793 / 180)), FastMathLite.cos(player.getYaw() * Math.PI / 180) * i);
                 Entity[] entities = player.getLevel().getCollidingEntities(aab);
                 if (entities.length > 0) {
                     for (Entity e : entities) {

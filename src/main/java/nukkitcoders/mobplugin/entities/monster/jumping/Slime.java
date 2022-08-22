@@ -161,4 +161,8 @@ public class Slime extends JumpingMonster {
         if (this.size == SIZE_SMALL) return 1;
         return 0;
     }
+
+    public int getSlimeSize() {
+        return this.size;
+    }
 }

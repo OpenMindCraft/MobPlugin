@@ -86,4 +86,8 @@ public class Pufferfish extends Fish {
 
         return super.entityBaseTick(tickDiff);
     }
+
+    public boolean isPuffed() {
+        return this.puffed > 0;
+    }
 }

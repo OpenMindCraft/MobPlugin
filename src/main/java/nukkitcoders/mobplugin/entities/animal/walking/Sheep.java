@@ -23,9 +23,9 @@ public class Sheep extends WalkingAnimal {
 
     public static final int NETWORK_ID = 13;
 
-    public boolean sheared = false;
-    public int color;
-    public int unshearTicks = -1;
+    protected boolean sheared = false;
+    protected int color;
+    protected int unshearTicks = -1;
 
     public Sheep(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
@@ -181,5 +181,9 @@ public class Sheep extends WalkingAnimal {
         }
 
         return super.entityBaseTick(tickDiff);
+    }
+
+    public boolean isSheared() {
+        return this.sheared;
     }
 }

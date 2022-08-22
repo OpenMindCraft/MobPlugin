@@ -17,7 +17,9 @@ import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
 import cn.nukkit.event.entity.EntityExplodeEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemBlock;
+import cn.nukkit.level.particle.HugeExplodeSeedParticle;
 import cn.nukkit.math.*;
+import cn.nukkit.network.protocol.LevelSoundEventPacket;
 import cn.nukkit.utils.Hash;
 import it.unimi.dsi.fastutil.longs.LongArraySet;
 
@@ -43,7 +45,7 @@ public class FireBallExplosion extends Explosion {
 
     @Override
     public boolean explodeA() {
-        if (what instanceof EntityExplosive && ((Entity) what).isInsideOfWater()) {
+        if (what instanceof EntityExplosive && Utils.entityInsideWaterFast((Entity) what)) {
             this.doesDamage = false;
             return true;
         }
@@ -170,7 +172,8 @@ public class FireBallExplosion extends Explosion {
                 }
             }
         }
-        this.level.addSound(new Vector3(this.source.x, this.source.y, this.source.z), Sound.RANDOM_EXPLODE);
+        this.level.addParticle(new HugeExplodeSeedParticle(this.source));
+        this.level.addLevelSoundEvent(source, LevelSoundEventPacket.SOUND_EXPLODE);
         return true;
     }
 }

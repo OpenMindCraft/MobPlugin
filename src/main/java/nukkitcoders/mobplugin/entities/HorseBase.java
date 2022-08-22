@@ -16,8 +16,8 @@ import cn.nukkit.network.protocol.LevelSoundEventPacket;
 import cn.nukkit.network.protocol.SetEntityLinkPacket;
 import nukkitcoders.mobplugin.entities.animal.WalkingAnimal;
 import nukkitcoders.mobplugin.entities.animal.walking.Donkey;
+import nukkitcoders.mobplugin.utils.FastMathLite;
 import nukkitcoders.mobplugin.utils.Utils;
-import org.apache.commons.math3.util.FastMath;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -148,8 +148,8 @@ public class HorseBase extends WalkingAnimal implements EntityRideable {
             f = friction / f;
             strafe = strafe * f;
             forward = forward * f;
-            double f1 = FastMath.sin(this.yaw * 0.017453292);
-            double f2 = FastMath.cos(this.yaw * 0.017453292);
+            double f1 = FastMathLite.sin(this.yaw * 0.017453292);
+            double f2 = FastMathLite.cos(this.yaw * 0.017453292);
             this.motionX = (strafe * f2 - forward * f1);
             this.motionZ = (forward * f2 + strafe * f1);
         } else {

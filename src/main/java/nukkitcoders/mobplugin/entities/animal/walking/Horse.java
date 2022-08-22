@@ -19,7 +19,7 @@ public class Horse extends HorseBase {
 
     public static final int NETWORK_ID = 23;
 
-    public int variant;
+    protected int variant;
 
     private static final int[] VARIANTS = {0, 1, 2, 3, 4, 5, 6, 256, 257, 258, 259, 260, 261, 262, 512, 513, 514, 515, 516, 517, 518,
             768, 769, 770, 771, 772, 773, 774, 1024, 1025, 1026, 1027, 1028, 1029, 1030};

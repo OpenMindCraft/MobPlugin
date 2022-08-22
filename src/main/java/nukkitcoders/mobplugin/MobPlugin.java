@@ -12,6 +12,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.plugin.PluginBase;
 import nukkitcoders.mobplugin.entities.BaseEntity;
+import nukkitcoders.mobplugin.entities.animal.flying.Allay;
 import nukkitcoders.mobplugin.entities.animal.flying.Bat;
 import nukkitcoders.mobplugin.entities.animal.flying.Bee;
 import nukkitcoders.mobplugin.entities.animal.flying.Parrot;
@@ -62,8 +63,8 @@ public class MobPlugin extends PluginBase implements Listener {
             return;
         }
 
-        this.getServer().getPluginManager().registerEvents(new EventListener(), this);
         this.registerEntities();
+        this.getServer().getPluginManager().registerEvents(new EventListener(), this);
 
         if (config.spawnDelay > 0) {
             this.getServer().getScheduler().scheduleDelayedRepeatingTask(this, new AutoSpawnTask(this, config.pluginConfig), config.spawnDelay, config.spawnDelay);
@@ -71,6 +72,8 @@ public class MobPlugin extends PluginBase implements Listener {
             if (!this.getServer().getPropertyBoolean("spawn-animals") || !this.getServer().getPropertyBoolean("spawn-mobs")) {
                 this.getServer().getLogger().notice("Disabling mob/animal spawning from server.properties does not disable spawning in MobPlugin");
             }
+        } else {
+            this.getServer().getLogger().notice("Mob spawning is disabled (autospawn-ticks <= 0)");
         }
     }
 
@@ -224,6 +227,7 @@ public class MobPlugin extends PluginBase implements Listener {
         Entity.registerEntity(GlowSquid.class.getSimpleName(), GlowSquid.class);
         Entity.registerEntity(Goat.class.getSimpleName(), Goat.class);
         Entity.registerEntity(Axolotl.class.getSimpleName(), Axolotl.class);
+        Entity.registerEntity(Allay.class.getSimpleName(), Allay.class);
 
         Entity.registerEntity(Blaze.class.getSimpleName(), Blaze.class);
         Entity.registerEntity(Ghast.class.getSimpleName(), Ghast.class);

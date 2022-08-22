@@ -38,7 +38,7 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
     }
 
     public float getDamage(Integer difficulty) {
-        return Utils.rand(this.getMinDamage(difficulty), this.getMaxDamage(difficulty));
+        return (float) Utils.rand(this.getMinDamage(difficulty), this.getMaxDamage(difficulty));
     }
 
     public float getMinDamage() {
@@ -75,7 +75,7 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
     }
 
     public void setDamage(float[] damage) {
-        if (damage.length < 4) {
+        if (damage.length != 4) {
             throw new IllegalArgumentException("Invalid damage array length");
         }
 
@@ -94,12 +94,12 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
     }
 
     public void setMinDamage(float[] damage) {
-        if (damage.length < 4) {
-            return;
+        if (damage.length != 4) {
+            throw new IllegalArgumentException("Invalid damage array length");
         }
 
         for (int i = 0; i < 4; i++) {
-            this.setMinDamage(Math.min(damage[i], this.getMaxDamage(i)), i);
+            this.setMinDamage(damage[i], i);
         }
     }
 
@@ -114,16 +114,17 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
     }
 
     public void setMaxDamage(float[] damage) {
-        if (damage.length < 4)
-            return;
+        if (damage.length != 4) {
+            throw new IllegalArgumentException("Invalid damage array length");
+        }
 
         for (int i = 0; i < 4; i++) {
-            this.setMaxDamage(Math.max(damage[i], this.getMinDamage(i)), i);
+            this.setMaxDamage(damage[i], i);
         }
     }
 
     public void setMaxDamage(float damage) {
-        setMinDamage(damage, Server.getInstance().getDifficulty());
+        this.setMaxDamage(damage, Server.getInstance().getDifficulty());
     }
 
     public void setMaxDamage(float damage, int difficulty) {
